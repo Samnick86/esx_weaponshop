@@ -2,3 +2,4 @@
 Legal and illegal weapon shop
 
 With Ammo Menu - by Samnick#4024
+Mele Weapon protect
