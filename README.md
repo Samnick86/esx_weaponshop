@@ -1,5 +1,5 @@
 # esx_weaponshop
 Legal and illegal weapon shop
 
-With Ammo Menu - by Samnick#4024
-Mele Weapon protect
+With Ammo Menu(Mele Weapon protect) - by Samnick#4024
+
