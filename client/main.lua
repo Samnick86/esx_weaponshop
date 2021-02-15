@@ -38,15 +38,85 @@ function OpenBuyLicenseMenu(zone)
 		}
 	}, function(data, menu)
 		if data.current.value == 'yes' then
-			ESX.TriggerServerCallback('esx_weaponshop:buyLicense', function(bought)
-				if bought then
-					menu.close()
-					OpenShopMenu(zone)
-				end
-			end)
+			BuyWeaponOrAmmo()
 		end
 	end, function(data, menu)
 		menu.close()
+	end)
+end
+
+function BuyWeaponOrAmmo()
+	ESX.UI.Menu.CloseAll()
+
+	ESX.UI.Menu.Open( 'default', GetCurrentResourceName(), 'weaorammo', 
+  {
+    title    = ('Ammo or Weapon'),
+    align = 'top-left', -- Menu position
+    elements = { -- Contains menu elements
+      {label = ('Weapons'),     value = 'weapon'},
+      {label = ('Weapons Ammo'),      value = 'ammo'}
+    }
+  },
+
+  function(data, menu) 
+    if data.current.value == 'weapon' then
+		print("weapon")
+		OpenShopMenu(CurrentActionData.zone)
+    end
+	if data.current.value == 'ammo' then
+		print("ammo")
+		OpenShopMenuAmmo(CurrentActionData.zone)
+	end    
+  end,
+  
+  function(data, menu) 
+      menu.close() 
+  end
+)
+end
+
+function OpenShopMenuAmmo(zone)
+	local elements = {}
+	ShopOpen = true
+
+	for i=1, #Config.Zones[zone].Items, 1 do
+		local item = Config.Zones[zone].Items[i]
+
+		table.insert(elements, {
+			label = ('%s - <span style="color: green;">%s</span>'):format(item.label, _U('shop_menu_item', ESX.Math.GroupDigits(item.price_ammo))),
+			price = item.price_ammo,
+			weaponName = item.item,
+			mele = item.mele
+		})
+	end
+
+	ESX.UI.Menu.CloseAll()
+	PlaySoundFrontend(-1, 'BACK', 'HUD_AMMO_SHOP_SOUNDSET', false)
+
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop', {
+		title = 'Ammo shop_menu_title',
+		align = 'top-left',
+		elements = elements
+	}, function(data, menu)
+		ESX.TriggerServerCallback('esx_weaponshop:buyWeaponAmmo', function(boughtammo)
+			if boughtammo and mele == "no" then
+				ESX.ShowNotification('You Bough 100 ammo. Price: '..data.current.price..'~g~$')
+				print(data.current.mele)
+			else
+				PlaySoundFrontend(-1, 'ERROR', 'HUD_AMMO_SHOP_SOUNDSET', false)
+				ESX.ShowNotification('You Can Not bought ammo for mele weapon')
+			end
+		end, data.current.weaponName, zone)
+	end, function(data, menu)
+
+		ShopOpen = false
+		menu.close()
+
+		CurrentAction     = 'shop_menu'
+		CurrentActionMsg  = _U('shop_menu_prompt')
+		CurrentActionData = { zone = zone }
+	end, function(data, menu)
+		--PlaySoundFrontend(-1, 'NAV', 'HUD_AMMO_SHOP_SOUNDSET', false)
 	end)
 end
 
@@ -148,7 +218,7 @@ Citizen.CreateThread(function()
 
 				SetBlipSprite (blip, 110)
 				SetBlipDisplay(blip, 4)
-				SetBlipScale  (blip, 1.0)
+				SetBlipScale  (blip, 0.8)
 				SetBlipColour (blip, 81)
 				SetBlipAsShortRange(blip, true)
 
@@ -222,8 +292,8 @@ Citizen.CreateThread(function()
 								OpenBuyLicenseMenu(CurrentActionData.zone)
 							end
 						end, GetPlayerServerId(PlayerId()), 'weapon')
-					else
-						OpenShopMenu(CurrentActionData.zone)
+					else			
+						BuyWeaponOrAmmo()
 					end
 				end
 
