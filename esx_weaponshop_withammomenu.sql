@@ -8,18 +8,17 @@ CREATE TABLE IF NOT EXISTS `weashops` (
   PRIMARY KEY (`id`)
 );
 
-
 INSERT INTO `weashops` (`id`, `zone`, `item`, `price`, `price_ammo`, `mele`) VALUES
 	(1, 'GunShop', 'WEAPON_PISTOL', 300, 10, 'no'),
 	(2, 'BlackWeashop', 'WEAPON_PISTOL', 500, 1, 'no'),
-	(3, 'GunShop', 'WEAPON_FLASHLIGHT', 60, 1, 'yes'),
-	(4, 'BlackWeashop', 'WEAPON_FLASHLIGHT', 70, 1, 'yes'),
-	(5, 'GunShop', 'WEAPON_MACHETE', 90, 1, 'yes'),
-	(6, 'BlackWeashop', 'WEAPON_MACHETE', 110, 1, 'yes'),
-	(7, 'GunShop', 'WEAPON_NIGHTSTICK', 150, 1, 'yes'),
-	(8, 'BlackWeashop', 'WEAPON_NIGHTSTICK', 150, 1, 'yes'),
-	(9, 'GunShop', 'WEAPON_BAT', 100, 1, 'yes'),
-	(10, 'BlackWeashop', 'WEAPON_BAT', 100, 1, 'yes'),
+	(3, 'GunShop', 'WEAPON_FLASHLIGHT', 60, 0, 'yes'),
+	(4, 'BlackWeashop', 'WEAPON_FLASHLIGHT', 70, 0, 'yes'),
+	(5, 'GunShop', 'WEAPON_MACHETE', 90, 0, 'yes'),
+	(6, 'BlackWeashop', 'WEAPON_MACHETE', 110, 0, 'yes'),
+	(7, 'GunShop', 'WEAPON_NIGHTSTICK', 150, 0, 'yes'),
+	(8, 'BlackWeashop', 'WEAPON_NIGHTSTICK', 150, 0, 'yes'),
+	(9, 'GunShop', 'WEAPON_BAT', 100, 0, 'yes'),
+	(10, 'BlackWeashop', 'WEAPON_BAT', 100, 0, 'yes'),
 	(11, 'GunShop', 'WEAPON_STUNGUN', 50, 1, 'no'),
 	(12, 'BlackWeashop', 'WEAPON_STUNGUN', 50, 1, 'no'),
 	(13, 'GunShop', 'WEAPON_MICROSMG', 1400, 33, 'no'),
@@ -40,8 +39,8 @@ INSERT INTO `weashops` (`id`, `zone`, `item`, `price`, `price_ammo`, `mele`) VAL
 	(28, 'BlackWeashop', 'WEAPON_BZGAS', 350, 1, 'no'),
 	(29, 'GunShop', 'WEAPON_FIREEXTINGUISHER', 100, 1, 'no'),
 	(30, 'BlackWeashop', 'WEAPON_FIREEXTINGUISHER', 100, 1, 'no'),
-	(31, 'GunShop', 'WEAPON_BALL', 50, 1, 'yes'),
-	(32, 'BlackWeashop', 'WEAPON_BALL', 50, 1, 'yes'),
+	(31, 'GunShop', 'WEAPON_BALL', 50, 0, 'yes'),
+	(32, 'BlackWeashop', 'WEAPON_BALL', 50, 0, 'yes'),
 	(33, 'GunShop', 'WEAPON_SMOKEGRENADE', 100, 1, 'no'),
 	(34, 'BlackWeashop', 'WEAPON_SMOKEGRENADE', 100, 1, 'no'),
 	(35, 'BlackWeashop', 'WEAPON_APPISTOL', 1100, 1, 'no'),
